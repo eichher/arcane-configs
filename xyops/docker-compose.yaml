@@ -1,0 +1,23 @@
+services:
+  xyops01:
+    image: ghcr.io/pixlcore/xyops:latest
+    container_name: xyops01
+    hostname: dockervm
+
+    init: true
+    restart: unless-stopped
+
+    environment:
+      XYOPS_xysat_local: "true"
+      TZ: Europe/Berlin
+
+    volumes:
+      - xy-data:/opt/xyops/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    ports:
+      - "5522:5522"
+      - "5523:5523"
+
+volumes:
+  xy-data:
